@@ -1,120 +1,61 @@
-
-
-### Fonksiyonun Eklenmesi
-
-`dinle` fonksiyonunu `.zshrc` dosyanıza eklemek için şu komutu kullanabilirsiniz:
-
-```bash
-echo 'dinle() {
-    if [ -z "$1" ]; then
-        echo -n "Dinlemek istediğiniz portu girin: "
-        read port
-    else
-        port=$1
-    fi
-    echo "nc -lvnp $port ile dinleniyor..."
-    
-    # CTRL+C sinyalini yakalayıp fonksiyonu sonlandırıyoruz
-    trap "echo Dinleme durduruluyor...; exit 0" SIGINT
-    
-    while true; do
-        nc -lvnp $port
-        # Netcat oturumu kapandıktan sonra kısa bir bekleme süresi ekliyoruz
-        sleep 1
-    done
-}' >> ~/.zshrc
-```
-
-### Güncellenmiş `README.md`
-
 ```markdown
-# Dinle Fonksiyonu
+# Port Dinleme Scripti
 
-Bu basit `dinle` fonksiyonu, belirttiğiniz bir portu `nc` (Netcat) ile dinler. Fonksiyon, port numarası verilmediğinde kullanıcıdan bir port numarası ister ve dinlemeye başlar. Dinleme kesildiğinde bile otomatik olarak devam eder.
+Bu proje, `dinle` isimli bir fonksiyon sağlar. Bu fonksiyon, belirli bir portu dinlemek için `nc` (Netcat) komutunu kullanır ve port üzerindeki gelen bağlantıları sürekli olarak dinler.
 
 ## Kurulum
 
-Fonksiyonu `.zshrc` dosyanıza eklemek için aşağıdaki adımları takip edebilirsiniz:
+### Bash ve Zsh Shell'leri İçin Fonksiyon Ekleyin
 
-1. Terminali açın ve aşağıdaki komutu çalıştırın:
+Aşağıdaki komutları terminalinize girerek `dinle` fonksiyonunu bash ve zsh shell'lerine ekleyebilirsiniz:
 
-    ```bash
-    echo 'dinle() {
-        if [ -z "$1" ]; then
-            echo -n "Dinlemek istediğiniz portu girin: "
-            read port
-        else
-            port=$1
-        fi
-        echo "nc -lvnp $port ile dinleniyor..."
-        
-        # CTRL+C sinyalini yakalayıp fonksiyonu sonlandırıyoruz
-        trap "echo Dinleme durduruluyor...; exit 0" SIGINT
-        
-        while true; do
-            nc -lvnp $port
-            # Netcat oturumu kapandıktan sonra kısa bir bekleme süresi ekliyoruz
-            sleep 1
-        done
-    }' >> ~/.zshrc
-    ```
+```bash
+echo 'dinle() { if [ -z "$1" ]; then echo -n "Dinlemek istediğiniz portu girin: "; read port; else port=$1; fi; echo "nc -lvnp $port ile dinleniyor..."; while true; do nc -lvnp $port; done; }' >> ~/.bashrc
+echo 'dinle() { if [ -z "$1" ]; then echo -n "Dinlemek istediğiniz portu girin: "; read port; else port=$1; fi; echo "nc -lvnp $port ile dinleniyor..."; while true; do nc -lvnp $port; done; }' >> ~/.zshrc
+```
 
-2. Değişikliklerin etkili olması için terminalinizi yeniden başlatın veya `.zshrc` dosyasını yeniden yükleyin:
+### Shell Yeniden Başlatma veya Yükleme
 
-    ```bash
-    source ~/.zshrc
-    ```
+Değişikliklerin etkili olabilmesi için shell oturumunuzu kapatıp açmanız veya konfigürasyon dosyalarını yeniden yüklemeniz gerekmektedir. Aşağıdaki komutları kullanarak bu işlemi gerçekleştirebilirsiniz:
+
+```bash
+source ~/.bashrc
+source ~/.zshrc
+```
 
 ## Kullanım
 
-Fonksiyonu kullanarak belirli bir portu dinlemek için aşağıdaki komutları kullanabilirsiniz:
+Fonksiyonu kullanmak için terminalde `dinle` komutunu çağırabilirsiniz. İki kullanım şekli vardır:
 
-### Port Numarası Vermeden Kullanmak
+1. **Port Numarası Sağlayarak:**
 
-Port numarası belirtmeden `dinle` komutunu yazdığınızda, sizden bir port numarası girmenizi ister:
+   Belirli bir portu dinlemek için port numarasını doğrudan belirtebilirsiniz:
 
-```bash
-dinle
-```
+   ```bash
+   dinle 1234
+   ```
 
-Ekranda şu mesajı göreceksiniz:
+   Bu komut, 1234 numaralı portu dinlemeye başlar.
 
-```
-Dinlemek istediğiniz portu girin:
-```
+2. **Port Numarası Girmeden:**
 
-### Port Numarasıyla Kullanmak
+   Port numarası belirtmezseniz, fonksiyon sizden bir port numarası girmenizi isteyecektir:
 
-Port numarasını doğrudan belirterek dinlemek için:
+   ```bash
+   dinle
+   ```
 
-```bash
-dinle 8080
-```
-
-Bu komut, belirtilen portu Netcat ile dinler ve terminalde şu mesajı gösterir:
-
-```
-nc -lvnp 8080 ile dinleniyor...
-```
-
-## Özellikler
-
-- Kullanıcıdan port numarası alır veya doğrudan argüman olarak verilen portu kullanır.
-- Dinleme kesildiğinde otomatik olarak yeniden başlar (sürekli dinleme modu).
-- `zsh` shell'i ile uyumludur.
+   Komut çalıştıktan sonra port numarasını girmeniz istenecek ve girilen port numarası dinlenmeye başlanacaktır.
 
 ## Gereksinimler
 
-- **Netcat (nc)**: Dinleme işlemini gerçekleştirmek için sisteminizde netcat kurulu olmalıdır.
+- Netcat (`nc`) komutunun sistemde yüklü olması gerekir. Çoğu Linux dağıtımında bu paket önceden yüklenmiştir. Yüklemek için aşağıdaki komutu kullanabilirsiniz:
 
-Netcat'i kurmak için:
-
-- Ubuntu/Debian: `sudo apt install netcat`
-- CentOS/Fedora: `sudo yum install nc`
+   ```bash
+   sudo apt-get install netcat
+   ```
 
 ## Lisans
 
-Bu proje MIT Lisansı ile lisanslanmıştır. Daha fazla bilgi için `LICENSE` dosyasına bakın.
+Bu proje MIT Lisansı altında lisanslanmıştır. Daha fazla bilgi için [Lisans Dosyasına](LICENSE) göz atabilirsiniz.
 ```
-
-Bu README dosyası, kullanıcıların fonksiyonu `.zshrc` dosyasına nasıl ekleyeceklerini ve nasıl kullanacaklarını açıklar. Ayrıca, fonksiyonun `Ctrl+C` ile düzgün bir şekilde sonlanmasını sağlar.
