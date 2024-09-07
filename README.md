@@ -1,4 +1,4 @@
-```markdown
+markdown
 # Port Dinleme Scripti
 
 Bu proje, `dinle` isimli bir fonksiyon sağlar. Bu fonksiyon, belirli bir portu dinlemek için `nc` (Netcat) komutunu kullanır ve port üzerindeki gelen bağlantıları sürekli olarak dinler.
@@ -58,4 +58,4 @@ Fonksiyonu kullanmak için terminalde `dinle` komutunu çağırabilirsiniz. İki
 ## Lisans
 
 Bu proje MIT Lisansı altında lisanslanmıştır. Daha fazla bilgi için [Lisans Dosyasına](LICENSE) göz atabilirsiniz.
-```
+
