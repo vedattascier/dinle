@@ -75,4 +75,4 @@ Bu proje MIT Lisansı ile lisanslanmıştır. Daha fazla bilgi için `LICENSE` d
 
 ---
 
-Bu, GitHub'daki README dosyanızda, kullanıcılara projenizin nasıl kurulacağını ve çalıştırılacağını net bir şekilde gösterecektir.
+
