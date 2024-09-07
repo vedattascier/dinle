@@ -1,78 +1,51 @@
+Port Dinleme Scripti
+Bu README, dinle isimli bir fonksiyonun nasıl kurulacağı ve kullanılacağı hakkında bilgi vermektedir. Bu fonksiyon, belirli bir portu dinlemek için nc (Netcat) komutunu kullanır ve port üzerinde gelen bağlantıları sürekli olarak dinler.
 
----
+Kurulum
+Bash ve Zsh Shell'leri için Fonksiyon Ekleyin:
 
-# Dinle Fonksiyonu
+dinle fonksiyonunu hem ~/.bashrc hem de ~/.zshrc dosyalarınıza eklemeniz gerekiyor. Bu, bash ve zsh shell'lerinde fonksiyonu kullanabilmenizi sağlar.
 
-Bu basit `dinle` fonksiyonu, belirttiğiniz bir portu `nc` (Netcat) ile dinler. Fonksiyon, eğer port numarası verilmemişse, kullanıcıdan bir port numarası istemekte ve dinlemeye başlamaktadır. Bağlantı kesildiğinde bile dinleme otomatik olarak devam eder.
+Aşağıdaki komutları çalıştırarak fonksiyonu her iki dosyaya da ekleyebilirsiniz:
 
-## Kullanım
+bash
+Kodu kopyala
+echo 'dinle() { if [ -z "$1" ]; then echo -n "Dinlemek istediğiniz portu girin: "; read port; else port=$1; fi; echo "nc -lvnp $port ile dinleniyor..."; while true; do nc -lvnp $port; done; }' >> ~/.zshrc
+echo 'dinle() { if [ -z "$1" ]; then echo -n "Dinlemek istediğiniz portu girin: "; read port; else port=$1; fi; echo "nc -lvnp $port ile dinleniyor..."; while true; do nc -lvnp $port; done; }' >> ~/.bashrc
+Shell Yeniden Başlatma veya Yükleme:
 
-### Fonksiyonun Tanımlanması
+Değişikliklerin etkili olabilmesi için shell oturumunuzu kapatıp açmanız veya aşağıdaki komutlarla konfigürasyon dosyalarını yeniden yüklemeniz gerekmektedir:
 
-Fonksiyonu kullanabilmek için `.bashrc` veya `.zshrc` dosyanıza aşağıdaki satırı ekleyin:
+bash
+Kodu kopyala
+source ~/.bashrc
+source ~/.zshrc
+Kullanım
+Fonksiyonu kullanmak için terminalde dinle komutunu çağırabilirsiniz. İki kullanım şekli vardır:
 
-```bash
-dinle() {
-    if [ -z "$1" ]; then
-        echo "Lütfen bir port numarası girin!"
-        echo -n "Dinlemek istediğiniz portu girin: "
-        read port
-    else
-        port=$1
-    fi
-    echo "nc -lvnp $port ile dinleniyor..."
-    while true; do
-        nc -lvnp $port
-    done
-}
-```
+Port Numarası Sağlayarak:
 
-Bu satırı ekledikten sonra terminali yeniden başlatın veya aşağıdaki komutları çalıştırın:
-- **Bash**: `source ~/.bashrc`
-- **Zsh**: `source ~/.zshrc`
+Belirli bir portu dinlemek için port numarasını doğrudan belirtebilirsiniz:
 
-### Komutların Kullanımı
+bash
+Kodu kopyala
+dinle 1234
+Bu komut, 1234 numaralı portu dinlemeye başlar.
 
-#### 1. Port numarası vermeden kullanmak:
-Eğer port numarası belirtmeden sadece `dinle` komutunu yazarsanız, sizden bir port numarası girmenizi ister.
+Port Numarası Girmeden:
 
-```bash
+Port numarası belirtmezseniz, fonksiyon sizden bir port numarası girmenizi isteyecektir:
+
+bash
+Kodu kopyala
 dinle
-```
+Komut çalıştıktan sonra port numarasını girmeniz istenecek ve girilen port numarası dinlenmeye başlanacaktır.
 
-Kullanıcıya şu mesaj gösterilir:
-```bash
-Lütfen bir port numarası girin!
-Dinlemek istediğiniz portu girin: 
-```
+Gereksinimler
+Netcat (nc) komutunun sistemde yüklü olması gerekir. Çoğu Linux dağıtımında bu paket önceden yüklenmiştir. Yüklemek için aşağıdaki komutu kullanabilirsiniz:
 
-#### 2. Port numarasıyla kullanmak:
-Port numarasını komutla beraber belirtebilirsiniz. Örneğin, 8080 portunu dinlemek için:
-
-```bash
-dinle 8080
-```
-
-Bu komut, Netcat ile belirtilen portu dinler:
-```bash
-nc -lvnp 8080 ile dinleniyor...
-```
-
-### Özellikler
-- Kullanıcıdan port numarası alır veya doğrudan argüman olarak verilen portu kullanır.
-- Dinleme kesildiğinde otomatik olarak yeniden başlar (sürekli dinleme modu).
-- Hem Bash hem de Zsh ile uyumludur.
-
-### Gereksinimler
-- **Netcat** (`nc`): Dinleme işlemini gerçekleştirmek için sisteminizde `nc` kurulu olmalıdır.
-  
-Netcat'i kurmak için:
-- **Ubuntu/Debian**: `sudo apt install netcat`
-- **CentOS/Fedora**: `sudo yum install nc`
-
-### Lisans
-Bu proje MIT Lisansı ile lisanslanmıştır. Daha fazla bilgi için `LICENSE` dosyasına bakın.
-
----
-
-
+bash
+Kodu kopyala
+sudo apt-get install netcat
+Lisans
+Bu proje MIT Lisansı altında lisanslanmıştır. Daha fazla bilgi için Lisans Dosyasına göz atabilirsiniz.
