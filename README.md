@@ -1,13 +1,23 @@
-Dinle Fonksiyonu
-Bu basit dinle fonksiyonu, belirttiğiniz bir portu nc (Netcat) ile dinler. Fonksiyon, eğer port numarası verilmemişse, kullanıcıdan bir port numarası istemekte ve dinlemeye başlamaktadır. Bağlantı kesildiğinde bile dinleme otomatik olarak devam eder.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dinle Fonksiyonu</title>
+</head>
+<body>
+    <h1>Dinle Fonksiyonu</h1>
+    <p>
+        Bu basit <code>dinle</code> fonksiyonu, belirttiğiniz bir portu <code>nc</code> (Netcat) ile dinler.
+        Fonksiyon, eğer port numarası verilmemişse, kullanıcıdan bir port numarası istemekte ve dinlemeye başlamaktadır.
+        Bağlantı kesildiğinde bile dinleme otomatik olarak devam eder.
+    </p>
 
-Kullanım
-Fonksiyonun Tanımlanması
-Fonksiyonu kullanabilmek için .bashrc veya .zshrc dosyanıza aşağıdaki satırı ekleyin:
+    <h2>Kullanım</h2>
 
-bash
-Kodu kopyala
-dinle() {
+    <h3>Fonksiyonun Tanımlanması</h3>
+    <p>Fonksiyonu kullanabilmek için <code>.bashrc</code> veya <code>.zshrc</code> dosyanıza aşağıdaki satırı ekleyin:</p>
+    <pre><code>dinle() {
     if [ -z "$1" ]; then
         echo "Lütfen bir port numarası girin!"
         echo -n "Dinlemek istediğiniz portu girin: "
@@ -20,43 +30,51 @@ dinle() {
         nc -lvnp $port
     done
 }
-Bu satırı ekledikten sonra terminali yeniden başlatın veya aşağıdaki komutları çalıştırın:
+    </code></pre>
 
-Bash: source ~/.bashrc
-Zsh: source ~/.zshrc
-Komutların Kullanımı
-1. Port numarası vermeden kullanmak:
-Eğer port numarası belirtmeden sadece dinle komutunu yazarsanız, sizden bir port numarası girmenizi ister.
+    <p>Bu satırı ekledikten sonra terminali yeniden başlatın veya aşağıdaki komutları çalıştırın:</p>
+    <ul>
+        <li><strong>Bash:</strong> <code>source ~/.bashrc</code></li>
+        <li><strong>Zsh:</strong> <code>source ~/.zshrc</code></li>
+    </ul>
 
-bash
-Kodu kopyala
-dinle
-Kullanıcıya şu mesaj gösterilir:
+    <h3>Komutların Kullanımı</h3>
 
-bash
-Kodu kopyala
-Lütfen bir port numarası girin!
-Dinlemek istediğiniz portu girin: 
-2. Port numarasıyla kullanmak:
-Port numarasını komutla beraber belirtebilirsiniz. Örneğin, 8080 portunu dinlemek için:
+    <h4>1. Port numarası vermeden kullanmak:</h4>
+    <p>Eğer port numarası belirtmeden sadece <code>dinle</code> komutunu yazarsanız, sizden bir port numarası girmenizi ister.</p>
+    <pre><code>dinle
+    </code></pre>
 
-bash
-Kodu kopyala
-dinle 8080
-Bu komut, Netcat ile belirtilen portu dinler:
+    <p>Kullanıcıya şu mesaj gösterilir:</p>
+    <pre><code>Lütfen bir port numarası girin!
+Dinlemek istediğiniz portu girin:
+    </code></pre>
 
-bash
-Kodu kopyala
-nc -lvnp 8080 ile dinleniyor...
-Özellikler
-Kullanıcıdan port numarası alır veya doğrudan argüman olarak verilen portu kullanır.
-Dinleme kesildiğinde otomatik olarak yeniden başlar (sürekli dinleme modu).
-Hem Bash hem de Zsh ile uyumludur.
-Gereksinimler
-Netcat (nc): Dinleme işlemini gerçekleştirmek için sisteminizde nc kurulu olmalıdır.
-Netcat'i kurmak için:
+    <h4>2. Port numarasıyla kullanmak:</h4>
+    <p>Port numarasını komutla beraber belirtebilirsiniz. Örneğin, 8080 portunu dinlemek için:</p>
+    <pre><code>dinle 8080
+    </code></pre>
 
-Ubuntu/Debian: sudo apt install netcat
-CentOS/Fedora: sudo yum install nc
-Lisans
-Bu proje MIT Lisansı ile lisanslanmıştır. Daha fazla bilgi için LICENSE dosyasına bakın.
+    <p>Bu komut, Netcat ile belirtilen portu dinler:</p>
+    <pre><code>nc -lvnp 8080 ile dinleniyor...
+    </code></pre>
+
+    <h2>Özellikler</h2>
+    <ul>
+        <li>Kullanıcıdan port numarası alır veya doğrudan argüman olarak verilen portu kullanır.</li>
+        <li>Dinleme kesildiğinde otomatik olarak yeniden başlar (sürekli dinleme modu).</li>
+        <li>Hem Bash hem de Zsh ile uyumludur.</li>
+    </ul>
+
+    <h2>Gereksinimler</h2>
+    <p><strong>Netcat</strong> (<code>nc</code>): Dinleme işlemini gerçekleştirmek için sisteminizde <code>nc</code> kurulu olmalıdır.</p>
+    <p>Netcat'i kurmak için:</p>
+    <ul>
+        <li><strong>Ubuntu/Debian:</strong> <code>sudo apt install netcat</code></li>
+        <li><strong>CentOS/Fedora:</strong> <code>sudo yum install nc</code></li>
+    </ul>
+
+    <h2>Lisans</h2>
+    <p>Bu proje MIT Lisansı ile lisanslanmıştır. Daha fazla bilgi için <code>LICENSE</code> dosyasına bakın.</p>
+</body>
+</html>
