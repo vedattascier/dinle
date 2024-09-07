@@ -1,4 +1,3 @@
-markdown
 # Port Dinleme Scripti
 
 Bu proje, `dinle` isimli bir fonksiyon sağlar. Bu fonksiyon, belirli bir portu dinlemek için `nc` (Netcat) komutunu kullanır ve port üzerindeki gelen bağlantıları sürekli olarak dinler.
