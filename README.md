@@ -9,11 +9,12 @@ Bu proje, `dinle` isimli bir fonksiyon sağlar. Bu fonksiyon, belirli bir portu 
 Aşağıdaki komutları terminalinize girerek `dinle` fonksiyonunu bash ve zsh shell'lerine ekleyebilirsiniz:
 
 ```bash
-echo 'dinle() { if [ -z "$1" ]; then echo -n "Dinlemek istediğiniz portu girin: "; read port; else port=$1; fi; echo "nc -lvnp $port ile dinleniyor..."; while true; do nc -lvnp $port; done; }' >> ~/.bashrc
+echo 'dinle() { if [ -z "$1" ]; then echo -n "Dinlemek istediğiniz portu girin: "; read port; else port=$1; fi; echo "nc -lvnp $port ile dinleniyor... (Ctrl+C ile durdurabilirsiniz)"; nc -lvnp $port; echo "Dinleme durduruldu."; }' >> ~/.bashrc
+
 ```
 
  ```bash
-echo 'dinle() { if [ -z "$1" ]; then echo -n "Dinlemek istediğiniz portu girin: "; read port; else port=$1; fi; echo "nc -lvnp $port ile dinleniyor..."; while true; do nc -lvnp $port; done; }' >> ~/.zshrc
+echo 'dinle() { if [ -z "$1" ]; then echo -n "Dinlemek istediğiniz portu girin: "; read port; else port=$1; fi; echo "nc -lvnp $port ile dinleniyor... (Ctrl+C ile durdurabilirsiniz)"; nc -lvnp $port; echo "Dinleme durduruldu."; }' >> ~/.zshrc
 ```
 
 ### Shell Yeniden Başlatma veya Yükleme
