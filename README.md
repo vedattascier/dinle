@@ -10,6 +10,9 @@ Aşağıdaki komutları terminalinize girerek `dinle` fonksiyonunu bash ve zsh s
 
 ```bash
 echo 'dinle() { if [ -z "$1" ]; then echo -n "Dinlemek istediğiniz portu girin: "; read port; else port=$1; fi; echo "nc -lvnp $port ile dinleniyor..."; while true; do nc -lvnp $port; done; }' >> ~/.bashrc
+```
+
+ ```bash
 echo 'dinle() { if [ -z "$1" ]; then echo -n "Dinlemek istediğiniz portu girin: "; read port; else port=$1; fi; echo "nc -lvnp $port ile dinleniyor..."; while true; do nc -lvnp $port; done; }' >> ~/.zshrc
 ```
 
@@ -31,10 +34,10 @@ Fonksiyonu kullanmak için terminalde `dinle` komutunu çağırabilirsiniz. İki
    Belirli bir portu dinlemek için port numarasını doğrudan belirtebilirsiniz:
 
    ```bash
-   dinle 1234
+   dinle 2121
    ```
 
-   Bu komut, 1234 numaralı portu dinlemeye başlar.
+   Bu komut, 2121 numaralı portu dinlemeye başlar.
 
 2. **Port Numarası Girmeden:**
 
