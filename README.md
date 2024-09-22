@@ -22,6 +22,8 @@ Değişikliklerin etkili olabilmesi için shell oturumunuzu kapatıp açmanız v
 
 ```bash
 source ~/.bashrc
+```
+```bash
 source ~/.zshrc
 ```
 
